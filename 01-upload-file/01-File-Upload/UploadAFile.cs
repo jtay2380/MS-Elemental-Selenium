@@ -29,7 +29,18 @@ namespace _01_upload_file
         [TestMethod]
         public void UploadFile()
         {
-            //Am I pushing to Git
+            string File = "MyUploadFile.txt";
+            string FileName = @"C:\Temp\" + File;
+            
+            IWebElement BrowseBtn = Driver.FindElement(By.Id("file-upload"));
+            IWebElement UploadBtn = Driver.FindElement(By.Id("file-submit"));
+
+            BrowseBtn.SendKeys(FileName);
+            UploadBtn.Click();
+
+            IWebElement FileUploaded = Driver.FindElement(By.Id("uploaded-files"));
+            Assert.IsTrue(FileUploaded.Text == File,"The File Did Not Upload Correctly");
+            
         }
 
         [TestInitialize]
